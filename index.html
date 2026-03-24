@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AU - Mi Historia | El Viaje del Código</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        accent: {
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 15s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+
+    <canvas id="bgCanvas" class="fixed top-0 left-0 w-full h-full -z-10 opacity-30 dark:opacity-20"></canvas>
+
+    <nav class="fixed top-0 w-full z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="font-display font-bold text-2xl gradient-text">&lt;AU /&gt;</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="nav-link">Inicio</a>
+                    <a href="#descubrimiento" class="nav-link">Descubrimiento</a>
+                    <a href="#aprendizaje" class="nav-link">Aprendizaje</a>
+                    <a href="#proyecto" class="nav-link">Proyecto Final</a>
+                    <a href="#reflexion" class="nav-link">Reflexión</a>
+                </div>
+                <button id="themeToggle" class="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                    <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 24.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="inicio" class="min-h-screen flex items-center justify-center relative px-4 pt-16">
+        <div class="max-w-5xl mx-auto text-center z-10">
+            <div class="mb-6 inline-block">
+                <span class="px-4 py-2 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400 text-sm font-semibold tracking-wide uppercase animate-pulse-slow">
+                    Mi Historia de Aprendizaje
+                </span>
+            </div>
+            <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                De la <span class="gradient-text">Curiosidad</span><br>
+                al <span class="gradient-text typewriter" id="typewriter">Código_</span>
+            </h1>
+            <p class="hero-text">
+                Un viaje interactivo a través del desarrollo web moderno. 
+                Descubre cómo transformé líneas de código en experiencias digitales.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#descubrimiento" class="btn-primary">
+                    Comenzar Viaje
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </a>
+                <button onclick="openModal()" class="btn-secondary">
+                    Ver Demo Interactiva
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="scroll-indicator">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <section id="descubrimiento" class="section-padding relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <span class="section-tag">Capítulo 1</span>
+                    <h2 class="section-title">El Primer Encuentro</h2>
+                    <p class="section-text">
+                        Todo comenzó con una simple pregunta: <em>¿Cómo se construyen las páginas web?</em> 
+                        Lo que parecía un misterio inalcanzable se convirtió en una puerta abierta a un mundo de posibilidades infinitas.
+                    </p>
+                    <p class="section-text">
+                        Descubrí que detrás de cada sitio web hay una historia de estructura, diseño y lógica. 
+                        HTML era el esqueleto, CSS la piel y JavaScript el alma que todo lo anima.
+                    </p>
+                    
+                    <div class="code-demo">
+                        <h3 class="code-header">
+                            <span class="dot bg-red-500"></span>
+                            <span class="dot bg-yellow-500"></span>
+                            <span class="dot bg-green-500"></span>
+                            index.html
+                        </h3>
+                        <pre class="code-block">&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Hola Mundo&lt;/h1&gt;
+    &lt;p&gt;Mi primera página&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</pre>
+                        <div class="code-preview">
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mb-2">Resultado:</p>
+                            <div class="preview-box">
+                                <h1 class="preview-title">Hola Mundo</h1>
+                                <p class="preview-text">Mi primera página</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reveal relative">
+                    <div class="image-glow"></div>
+                    <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop&q=80" 
+                         alt="Código en pantalla" 
+                         class="hero-image animate-float">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="aprendizaje" class="section-padding bg-slate-100 dark:bg-slate-800/50 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative">
+            <div class="text-center mb-16 reveal">
+                <span class="section-tag-accent">Capítulo 2</span>
+                <h2 class="section-title">El Camino del Conocimiento</h2>
+                <p class="section-subtitle">Cada semana trajo nuevos desafíos y victorias</p>
+            </div>
+
+            <div class="relative">
+                <div class="timeline-line"></div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-content-left">
+                        <h3 class="timeline-title">Semana 1-2</h3>
+                        <p class="timeline-text">Fundamentos de HTML5 y estructura semántica. Aprendí la importancia de las etiquetas correctas para accesibilidad y SEO.</p>
+                    </div>
+                    <div class="timeline-dot bg-primary-500">1</div>
+                    <div class="timeline-card">
+                        <div class="card-header">
+                            <div class="badge-orange">HTML</div>
+                            <h4 class="md:hidden font-bold text-lg">Semana 1-2</h4>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Estructura Semántica</span>
+                                <span class="text-primary-500">90%</span>
+                            </div>
+                            <div class="bar-bg">
+                                <div class="bar-fill bg-orange-500" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal flex-row-reverse">
+                    <div class="timeline-content-right">
+                        <h3 class="timeline-title">Semana 3-4</h3>
+                        <p class="timeline-text">CSS3, Flexbox y Grid Layout. El momento "¡Eureka!" cuando todo comenzó a verse bien organizado y responsive.</p>
+                    </div>
+                    <div class="timeline-dot bg-accent-500">2</div>
+                    <div class="timeline-card md:text-right">
+                        <div class="card-header md:flex-row-reverse">
+                            <div class="badge-blue">CSS</div>
+                            <h4 class="md:hidden font-bold text-lg">Semana 3-4</h4>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="flex justify-between text-sm mb-1 md:flex-row-reverse">
+                                <span>Flexbox & Grid</span>
+                                <span class="text-accent-500">85%</span>
+                            </div>
+                            <div class="bar-bg">
+                                <div class="bar-fill bg-blue-500 md:ml-auto" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-content-left">
+                        <h3 class="timeline-title">Semana 5-6</h3>
+                        <p class="timeline-text">JavaScript: La magia de la interactividad. Eventos, DOM manipulation y la lógica de programación que da vida a las páginas.</p>
+                    </div>
+                    <div class="timeline-dot bg-yellow-500">3</div>
+                    <div class="timeline-card">
+                        <div class="card-header">
+                            <div class="badge-yellow">JS</div>
+                            <h4 class="md:hidden font-bold text-lg">Semana 5-6</h4>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span>Interactivity</span>
+                                <span class="text-yellow-500">80%</span>
+                            </div>
+                            <div class="bar-bg">
+                                <div class="bar-fill bg-yellow-500" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proyecto" class="section-padding">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="section-tag">Capítulo 3</span>
+                <h2 class="section-title">La Creación</h2>
+                <p class="section-subtitle max-w-2xl mx-auto">
+                    Aplicando todo el conocimiento adquirido para construir algo significativo: 
+                    esta misma historia, contada a través del código.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="reveal feature-card group">
+                    <div class="feature-icon bg-primary-100 dark:bg-primary-900/30 text-primary-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Diseño Responsive</h3>
+                    <p class="feature-text">Adaptable a cualquier dispositivo utilizando Tailwind CSS y mobile-first approach.</p>
+                </div>
+
+                <div class="reveal feature-card group" style="transition-delay: 100ms;">
+                    <div class="feature-icon bg-accent-100 dark:bg-accent-900/30 text-accent-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Interacción Dinámica</h3>
+                    <p class="feature-text">Animaciones suaves, canvas interactivo y efectos de scroll que mejoran la experiencia.</p>
+                </div>
+
+                <div class="reveal feature-card group" style="transition-delay: 200ms;">
+                    <div class="feature-icon bg-green-100 dark:bg-green-900/30 text-green-600">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="feature-title">Modo Oscuro</h3>
+                    <p class="feature-text">Implementación completa de tema oscuro/claro con persistencia y transiciones suaves.</p>
+                </div>
+            </div>
+
+            <div class="reveal playground">
+                <div class="glow-top"></div>
+                <div class="glow-bottom"></div>
+                
+                <div class="playground-content">
+                    <div>
+                        <h3 class="playground-title">Demo Interactiva</h3>
+                        <p class="playground-desc">
+                            Prueba los conceptos aprendidos. Modifica los valores y observa cómo 
+                            JavaScript manipula el DOM en tiempo real.
+                        </p>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="control-label">Color de Fondo</label>
+                                <div class="color-buttons">
+                                    <button onclick="changeColor('bg-blue-500')" class="color-btn bg-blue-500"></button>
+                                    <button onclick="changeColor('bg-purple-500')" class="color-btn bg-purple-500"></button>
+                                    <button onclick="changeColor('bg-pink-500')" class="color-btn bg-pink-500"></button>
+                                    <button onclick="changeColor('bg-green-500')" class="color-btn bg-green-500"></button>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="control-label">Radio de Borde</label>
+                                <input type="range" min="0" max="50" value="12" class="control-range" oninput="changeRadius(this.value)">
+                            </div>
+                            
+                            <div>
+                                <label class="control-label">Rotación</label>
+                                <input type="range" min="0" max="360" value="0" class="control-range" oninput="changeRotate(this.value)">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-center">
+                        <div id="demoBox" class="demo-box bg-blue-500">
+                            ¡Hola!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reflexion" class="section-padding bg-gradient-to-br from-primary-50 to-accent-50 dark:from-slate-900 dark:to-slate-800 relative">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <span class="section-tag">Epílogo</span>
+            <h2 class="section-title">Lo Que Aprendí</h2>
+            
+            <div class="reflection-card">
+                <blockquote class="quote">
+                    "El código no es solo instrucciones para una máquina, 
+                    es el lenguaje mediante el cual damos forma a nuestras ideas 
+                    y las compartimos con el mundo."
+                </blockquote>
+                
+                <div class="lessons-grid">
+                    <div class="lesson-item border-primary-500">
+                        <h4 class="lesson-title">Paciencia</h4>
+                        <p class="lesson-text">Cada error es una lección disfrazada. La persistencia vence la complejidad.</p>
+                    </div>
+                    <div class="lesson-item border-accent-500">
+                        <h4 class="lesson-title">Creatividad</h4>
+                        <p class="lesson-text">La técnica sin imaginación es vacía. El diseño y la lógica deben bailar juntos.</p>
+                    </div>
+                    <div class="lesson-item border-yellow-500">
+                        <h4 class="lesson-title">Comunidad</h4>
+                        <p class="lesson-text">No estamos solos. Documentación, foros y compañeros son recursos invaluables.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <p class="text-slate-600 dark:text-slate-400 mb-6">¿Listo para comenzar tu propia historia?</p>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-restart">
+                    Volver al Inicio ↺
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <span class="font-display font-bold text-2xl text-white">&lt;AU /&gt;</span>
+                <p class="mt-2 text-sm">Proyecto de Desarrollo Web - 2026</p>
+            </div>
+            
+            <div class="flex gap-6 text-sm">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">Tailwind</span>
+            </div>
+            
+            <div class="text-sm">
+                <p>Hecho con 💜 y mucho ☕</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="demoModal" class="modal hidden" onclick="closeModalOnClick(event)">
+        <div class="modal-content">
+            <button onclick="closeModal()" class="modal-close">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            
+            <h3 class="modal-title">Características Implementadas</h3>
+            <ul class="modal-list">
+                <li class="modal-item">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Canvas animado con partículas interactivas
+                </li>
+                <li class="modal-item">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Animaciones al scroll (Intersection Observer API)
+                </li>
+                <li class="modal-item">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Cambio de tema oscuro/claro con localStorage
+                </li>
+                <li class="modal-item">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Efecto typewriter dinámico
+                </li>
+                <li class="modal-item">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Manipulación del DOM en tiempo real
+                </li>
+                <li class="modal-item">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Diseño totalmente responsive (Mobile-first)
+                </li>
+            </ul>
+            
+            <div class="modal-footer">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
+                    <strong>Tecnologías:</strong> HTML5 Semántico, CSS3 (Tailwind), JavaScript Vanilla, Canvas API
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
