@@ -128,14 +128,6 @@ El proyecto refleja los siguientes aprendizajes clave:
 - **Creatividad**: La combinación de diseño y lógica crea experiencias únicas
 - **Comunidad**: La documentación y recursos colaborativos son fundamentales
 
-##  Mejoras Futuras Posibles
-
-- [ ] Agregar formulario de contacto funcional
-- [ ] Implementar internacionalización (i18n)
-- [ ] Añadir más secciones de proyectos
-- [ ] Optimizar imágenes con lazy loading nativo
-- [ ] Implementar PWA (Progressive Web App)
-
 ##  Autor
 
 **AU** - Proyecto de Desarrollo Web 2026
